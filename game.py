@@ -14,10 +14,10 @@ class Character:
         monster.hp -= damage
         print(f"{monster.name}에게 {damage}의 데미지를 입혔습니다!")
 
-    def magic_attack(self, monster):
-        if self.magic_attack_count <= 0:
-            print("마법 공격 사용 가능 횟수 소진!")
-            return
+    def magic_attack(self, monster):        
+        # if self.magic_attack_count <= 0:
+        #     print("마법 공격 횟수 소진! 지금부터 마법 공격 사용 시 피해만 입습니다!")
+        #     return
         print(f"{self.name}의 마법 공격!")
         damage = random.randint(self.power - 5, self.power + 0) * 2
         monster.hp -= damage
@@ -25,8 +25,7 @@ class Character:
         self.magic_attack_count -= 1
 
     def show_status(self):
-        print(
-            f"{self.name} (체력: {self.hp}, 파워: {self.power}, 마법공격 가능 횟수: {self.magic_attack_count})")
+        print(f"{self.name} (체력: {self.hp}, 파워: {self.power}, 마법공격 가능 횟수: {self.magic_attack_count})")
 
 
 class Monster:
@@ -37,7 +36,7 @@ class Monster:
 
     def attack(self, player):
         print(f"{self.name}의 공격!")
-        damage = random.randint(self.power + 0, self.power + 6)
+        damage = random.randint(self.power + 1, self.power + 6)
         player.hp -= damage
         print(f"{player.name}에게 {damage}의 데미지를 입혔습니다!")
 
@@ -63,6 +62,8 @@ print(f"{player.name} vs {monster.name}! 전투 시작!!")
 while True:
     # 플레이어 턴
     print(f"== {player.name}의 차례 ==")
+    if player.magic_attack_count <= 0:
+        print("마법 공격 횟수 소진! 지금부터 마법 공격 사용 시 피해만 입습니다!")
     player.show_status()
     monster.show_status()
     attack_type = input("어떤 공격을 사용하시겠습니까? (1. 일반공격 / 2. 마법공격): ")
@@ -77,6 +78,8 @@ while True:
     if monster.hp <= 0:
         print(f"{monster.name}를 물리쳤습니다! {player.name}의 승리!")
         break
+
+    print('\n')
 
     # 몬스터 턴
     print(f"== {monster.name}의 차례 ==")
