@@ -15,9 +15,9 @@ class Character:
         print(f"{monster.name}에게 {damage}의 데미지를 입혔습니다!")
 
     def magic_attack(self, monster):        
-        # if self.magic_attack_count <= 0:
-        #     print("마법 공격 횟수 소진! 지금부터 마법 공격 사용 시 피해만 입습니다!")
-        #     return
+        if self.magic_attack_count <= 0:
+            print("마법 공격 횟수 소진! 지금부터 마법 공격 사용 시 피해만 입습니다!")
+            return
         print(f"{self.name}의 마법 공격!")
         damage = random.randint(self.power - 5, self.power + 0) * 2
         monster.hp -= damage
